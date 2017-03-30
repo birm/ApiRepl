@@ -29,6 +29,7 @@ class PersonWorker(BaseWorker):
         lookup = [p for p in people.keys() if
                   p > self.last and p <= self.maximum]
         if len(lookup) == 0:
+            self.finished = True
             return 0
         who = sorted(lookup)[0]
         self.last = who
