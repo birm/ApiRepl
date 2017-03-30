@@ -13,8 +13,10 @@ class BaseWorker(Object):
         """Handle general initialization for all classes."""
         self.type = type
         self.args = args
-        self.kwarfs = kwargs
-        cursor = pymysql.connect(host='localhost', db='fetch').cursor()
+        self.kwargs = kwargs
+        host = self.kwargs.get('host', "localhost")
+        db = self.kwargs.get('db', "localhost")
+        cursor = pymysql.connect(host=host, db=db).cursor()
         self.cursor = cursor
 
         queue_query = "select * from queue where started is null\
