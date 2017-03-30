@@ -18,6 +18,9 @@ Person:
 
 class PersonWorker(BaseWorker):
     """ A fictional worker for a person api. """
+    def __init__(self, *args, **kwargs):
+        BaseWorker.__init__(self, *args, **kwargs)
+
     def api(self):
         """ Specalization for this api. """
         # get a list of names
@@ -28,7 +31,7 @@ class PersonWorker(BaseWorker):
         if len(lookup) == 0:
             return 0
         who = sorted(lookup)[0]
-        self.last=who
+        self.last = who
         person = json.load(urllib2.urlopen(
             "api.people.com/{item}".format(item=who)))
         return person
@@ -52,4 +55,3 @@ if __name__ == "__main__":
         if item is 0 or throttle():
             del worker
         saveobj(item)
-        throttle()

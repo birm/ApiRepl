@@ -12,6 +12,6 @@ setup(name='ApiRepl',
                    'Intended Audience :: Developers',
                    'Programming Language :: SQL',
                    'Programming Language :: Python :: 2.7'],
-      long_description=open('README.md', 'r').read(),
+      long_description=open('readme.md', 'r').read(),
       packages=['ApiRepl'],
       )

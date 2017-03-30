@@ -1,7 +1,7 @@
 import json
 import pymysql
 
-class BaseWorker(Object):
+class BaseWorker(object):
     """
     Base tools to fetch and use objects from an
      API and process them gracefully with a generator.
@@ -11,18 +11,18 @@ class BaseWorker(Object):
 
     def __init__(self, *args, **kwargs):
         """Handle general initialization for all classes."""
-        self.itemtype = self.kwargs.get('type', "undefined")
         self.args = args
         self.kwargs = kwargs
+        self.itemtype = kwargs.get('type', "undefined")
         host = self.kwargs.get('host', "localhost")
-        db = self.kwargs.get('db', "localhost")
-        cursor = pymysql.connect(host=host, db=db).cursor()
+        db = self.kwargs.get('db', "apirepl")
+        cursor = pymysql.connect(host=host, db=db).cursor(pymysql.cursors.DictCursor)
         self.cursor = cursor
 
-        queue_query = "select * from queue where type = %s started is null\
+        queue_query = "select * from queue where type = %s and started is null\
         order by priority desc limit 1;"
         # keep those variables
-        cursor.execute(queue_query, (self.itemtype, ))
+        cursor.execute(queue_query, (kwargs.get('type', "undefined"), ))
         result = cursor.fetchone()
         self.maximum = result['min']
         self.minimum = result['max']
@@ -30,7 +30,7 @@ class BaseWorker(Object):
         queue_id = result['id']
         self.queue_id = queue_id
 
-        started_query = "update queue set in_progress='Y' where\
+        started_query = "update queue set started=now() where\
         id=%s; self.queue_id;"
         cursor.execute(started_query, (queue_id,))
         self.count = 0
