@@ -23,7 +23,7 @@ def throttle():
     return random.random() > 0.95
 
 def test_specalization():
-    worker = PersonWorker(type="person")
+    worker = PersonWorker(type="undefined")
     for item in worker:
         if item is 0 or throttle():
             del worker
