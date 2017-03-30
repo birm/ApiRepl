@@ -1,7 +1,7 @@
 import json
 import pymysql
 
-class BaseMethod(Object):
+class BaseWorker(Object):
     """
     Base tools to fetch and use objects from an
      API and process them gracefully with a generator.
