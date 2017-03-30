@@ -1,11 +1,3 @@
-/*errors*/
-CREATE TABLE type
-  (
-    `name` VARCHAR(64) NOT NULL,
-    `method` VARCHAR(64) NOT NULL,
-    primary key ('Name')
-  );
-
 /*queue*/
 CREATE TABLE queue
  (
