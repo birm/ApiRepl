@@ -34,6 +34,7 @@ class BaseWorker(object):
         id=%s; self.queue_id;"
         cursor.execute(started_query, (queue_id,))
         self.count = 0
+        self.finished = False
         self.last = self.minimum
 
     def __iter__(self):
@@ -54,9 +55,10 @@ class BaseWorker(object):
         Search the api for the next item.
         """
         self.last
-        if True: # if there's more to go
+        if self.count<=1: # if there's more to go
             return {{"title": "Sample Record"}}
         else: # if done
+            self.finished = True
             return 0
 
     def next(self):
@@ -86,7 +88,7 @@ class BaseWorker(object):
         self.cursor.execute(query, (self.count,))
         done_queue = "update queue set finished = now() where id = %s;"
         self.cursor.execute(done_queue, (self.queue_id,))
-        if False:  # if we didn't finish
+        if not self.finished:  # if we didn't finish
             # if we did not, add a new queue entry
             next_queue = "insert into queue (priority, type, min, max)\
             values(%s, %s, %s, %s);"
