@@ -1,0 +1,25 @@
+language: python
+python:
+    - 2.7.8
+
+services:
+  - mysql
+
+before_install:
+  - mysql -u root -e 'CREATE DATABASE fetch;'
+  - mysql -u root -e "grant all on *.* to 'travis'@'127.0.0.1' with grant option;"
+  - mysql -u root -e "grant all on *.* to 'travis'@'localhost' with grant option;"
+
+install:
+    - pip install pytest pytest-cov
+    - pip install -r requirements.txt
+    - travis_retry python setup.py install
+
+script:
+    # Database Configuration
+    - schema.sql | mysql -u root fetch
+    # function tests
+    - py.test samples/ci_test.py
+
+notifications:
+  slack: rbirm:fjJKXGPbjyXSGAKKaOU6GWEh
