@@ -14,6 +14,7 @@ class BaseWorker(object):
         self.args = args
         self.kwargs = kwargs
         self.itemtype = kwargs.get('type', "undefined")
+        raise BaseException(kwargs.get('type', "undefined")) # super lazy ci as debug code :O
         host = self.kwargs.get('host', "localhost")
         db = self.kwargs.get('db', "apirepl")
         cursor = pymysql.connect(host=host, db=db).cursor()
