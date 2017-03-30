@@ -11,9 +11,9 @@ class BaseWorker(object):
 
     def __init__(self, *args, **kwargs):
         """Handle general initialization for all classes."""
-        self.itemtype = self.kwargs.get('type', "undefined")
         self.args = args
         self.kwargs = kwargs
+        self.itemtype = self.kwargs.get('type', "undefined")
         host = self.kwargs.get('host', "localhost")
         db = self.kwargs.get('db', "localhost")
         cursor = pymysql.connect(host=host, db=db).cursor()
