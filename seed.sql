@@ -1,1 +1,1 @@
-insert into queue(type, min, max) values ("person","a","z");
+insert into queue(type, min, max) values ("undefined","a","z");
