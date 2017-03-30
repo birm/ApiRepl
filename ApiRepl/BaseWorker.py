@@ -22,6 +22,7 @@ class BaseWorker(object):
         queue_query = "select * from queue where type = %s and started is null\
         order by priority desc limit 1;"
         # keep those variables
+        print itemtype
         cursor.execute(queue_query, (self.itemtype, ))
         result = cursor.fetchall()[0]
         self.maximum = result['min']
