@@ -30,7 +30,7 @@ class BaseWorker(object):
         queue_id = result['id']
         self.queue_id = queue_id
 
-        started_query = "update queue set in_progress='Y' where\
+        started_query = "update queue set started=now() where\
         id=%s; self.queue_id;"
         cursor.execute(started_query, (queue_id,))
         self.count = 0
