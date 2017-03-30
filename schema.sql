@@ -6,8 +6,8 @@ CREATE TABLE queue
     `type`        VARCHAR(64) NOT NULL,
     `min`         VARCHAR(64),
     `max`         VARCHAR(64),
-    `started` TIMESTAMP,
-    `finished` TIMESTAMP,
+    `started` DATETIME,
+    `finished` DATETIME,
     PRIMARY KEY (id)
   );
 
