@@ -3,7 +3,7 @@ To demonstrate how to use this class, here is one way to use this tool.
 """
 
 from ApiRepl import BaseWorker
-
+import random
 
 class PersonWorker(BaseWorker):
     """ A fictional worker for a person api. """
