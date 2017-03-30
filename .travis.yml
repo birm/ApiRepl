@@ -6,7 +6,7 @@ services:
   - mysql
 
 before_install:
-  - mysql -u root -e 'CREATE DATABASE fetch;'
+  - mysql -u root -e 'create schema fetch;'
   - mysql -u root -e "grant all on *.* to 'travis'@'127.0.0.1' with grant option;"
   - mysql -u root -e "grant all on *.* to 'travis'@'localhost' with grant option;"
 
