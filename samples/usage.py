@@ -46,7 +46,7 @@ def throttle():
     return random.random() > 0.95
 
 if __name__ == "__main__":
-    worker = BaseWorker()
+    worker = PersonWorker(type="person")
     for item in worker:
         if item is 0 or throttle():
             del worker
