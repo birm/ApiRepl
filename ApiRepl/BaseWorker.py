@@ -48,7 +48,7 @@ class BaseWorker(Object):
         """
         return self.next()
 
-    # search the api for the next item
+
     def api(self):
         """
         Search the api for the next item.
