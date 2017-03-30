@@ -12,6 +12,7 @@ class PersonWorker(BaseWorker):
 
     def api(self):
         """ Specalization for this api. """
+        self.finished=True
         return {'TEST':'Success'}
 
 
