@@ -16,7 +16,7 @@ class BaseWorker(object):
         self.itemtype = kwargs.get('type', "undefined")
         host = self.kwargs.get('host', "localhost")
         db = self.kwargs.get('db', "apirepl")
-        cursor = pymysql.connect(host=host, db=db).cursor()
+        cursor = pymysql.connect(host=host, db=db).cursor(pymysql.cursors.DictCursor)
         self.cursor = cursor
 
         queue_query = "select * from queue where type = %s"
