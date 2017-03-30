@@ -23,7 +23,7 @@ class BaseWorker(object):
         # and started is null\   order by priority desc limit 1;"
         # keep those variables
         cursor.execute(queue_query, (kwargs.get('type', "undefined"), ))
-        result = cursor.fetchall()[0]
+        result = cursor.fetchone()
         self.maximum = result['min']
         self.minimum = result['max']
         self.apitype = result['type']
