@@ -7,6 +7,9 @@ from ApiRepl import BaseWorker
 
 class PersonWorker(BaseWorker):
     """ A fictional worker for a person api. """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def api(self):
         """ Specalization for this api. """
         return {'TEST':'Success'}
