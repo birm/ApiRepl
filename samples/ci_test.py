@@ -26,5 +26,6 @@ def test_specalization():
     worker = PersonWorker(type="undefined")
     for item in worker:
         if item is 0 or throttle():
-            del worker
+            break
         saveobj(item)
+    del worker
