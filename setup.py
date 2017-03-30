@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='ApiRepl',
-      version='1',
+      version='2',
       description='Elastic API to database worker framework.',
       author='Ryan Birmingham',
       author_email='birm@rbirm.us',
