@@ -1,7 +1,7 @@
 /*queue*/
 CREATE TABLE queue
  (
-    `id`          INT auto_increment NOT NULL
+    `id`          INT auto_increment NOT NULL,
     `priority`    INT DEFAULT 0,
     `type`        VARCHAR(64) NOT NULL,
     `min`         VARCHAR(64),
@@ -10,6 +10,7 @@ CREATE TABLE queue
     `finished` TIMESTAMP default NULL,
     PRIMARY KEY (id)
  );
+
 CREATE TABLE errors
  (
   `id`     INT auto_increment NOT NULL,
@@ -18,8 +19,6 @@ CREATE TABLE errors
   `source` INT NOT NULL,
   PRIMARY KEY ('Id')
  );
-
-
 
 /*FetchLog*/
 CREATE TABLE fetchlog
