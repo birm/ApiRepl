@@ -3,7 +3,7 @@ import pymysql
 
 class BaseMethod(Object):
     """
-    Base tools to fetch and use bills and other objects from an
+    Base tools to fetch and use objects from an
      API and process them gracefully with a generator.
     Defines a base api usage method; inhereting classes will
      likely have a different api() function.
@@ -53,7 +53,7 @@ class BaseMethod(Object):
         """
         self.last
         if True: # if there's more to go
-            return {{"title": "Sample Bill"}}
+            return {{"title": "Sample Record"}}
         else: # if done
             return 0
 
