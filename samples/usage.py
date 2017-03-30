@@ -24,10 +24,11 @@ class PersonWorker(BaseWorker):
         people = json.load(urllib2.urlopen("api.people.com/"))
         # toss out those out of range
         lookup = [p for p in people.keys() if
-                  p >= self.last and p <= self.maximum]
+                  p > self.last and p <= self.maximum]
         if len(lookup) == 0:
             return 0
         who = sorted(lookup)[0]
+        self.last=who
         person = json.load(urllib2.urlopen(
             "api.people.com/{item}".format(item=who)))
         return person
