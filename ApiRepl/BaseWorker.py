@@ -11,7 +11,7 @@ class BaseWorker(Object):
 
     def __init__(self, *args, **kwargs):
         """Handle general initialization for all classes."""
-        self.type = type
+        self.itemtype = self.kwargs.get('type', "undefined")
         self.args = args
         self.kwargs = kwargs
         host = self.kwargs.get('host', "localhost")
@@ -19,10 +19,10 @@ class BaseWorker(Object):
         cursor = pymysql.connect(host=host, db=db).cursor()
         self.cursor = cursor
 
-        queue_query = "select * from queue where started is null\
+        queue_query = "select * from queue where type = %s started is null\
         order by priority desc limit 1;"
         # keep those variables
-        cursor.execute(queue_query)
+        cursor.execute(queue_query, (self.itemtype, ))
         result = cursor.fetchone()
         self.maximum = result['min']
         self.minimum = result['max']
