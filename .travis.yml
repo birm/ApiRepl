@@ -6,7 +6,7 @@ services:
   - mysql
 
 before_install:
-  - mysql -u root -e 'create schema fetch;'
+  - mysql -u root -e 'create schema apirepl;'
   - mysql -u root -e "grant all on *.* to 'travis'@'127.0.0.1' with grant option;"
   - mysql -u root -e "grant all on *.* to 'travis'@'localhost' with grant option;"
 
@@ -17,7 +17,7 @@ install:
 
 script:
     # Database Configuration
-    - schema.sql | mysql -u root fetch
+    - schema.sql | mysql -u root apirepl
     # function tests
     - py.test samples/ci_test.py
 
