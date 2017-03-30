@@ -18,7 +18,7 @@ install:
 
 script:
     # Database Configuration
-    - schema.sql | mysql -u root apirepl
+    - mysql -u root apirepl < schema.sql
     # function tests
     - py.test samples/ci_test.py
 
