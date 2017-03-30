@@ -24,7 +24,7 @@ class BaseWorker(Object):
         result = cursor.fetchone()
         self.maximum = result['min']
         self.minimum = result['max']
-        self.state = result['state']
+        self.apitype = result['type']
         queue_id = result['id']
         self.queue_id = queue_id
 
@@ -69,9 +69,9 @@ class BaseWorker(Object):
         except StopIteration:
             pass
         except Exception as err:
-            query = "insert into error (state, error, source)\
+            query = "insert into error (type, error, source)\
              values(%s, %s, %s);"
-            self.cursor.execute(query, (self.state, str(err), self.queue_id))
+            self.cursor.execute(query, (self.apitype, str(err), self.queue_id))
             raise err
         self.count += 1
 
@@ -84,9 +84,10 @@ class BaseWorker(Object):
         self.cursor.execute(query, (self.count,))
         done_queue = "update queue set finished = now() where id = %s;"
         self.cursor.execute(done_queue, (self.queue_id,))
-        if False: # if we didn't finish
+        if False:  # if we didn't finish
             # if we did not, add a new queue entry
-            next_queue = "insert into queue (priority, state, min, max)\
+            next_queue = "insert into queue (priority, type, min, max)\
             values(%s, %s, %s, %s);"
-            self.cursor.execute(neq_queue, (self.priority, self.state,
-                                            self.last, self.maximum))
+            self.cursor.execute(next_queue, (self.priority,
+                                             self.apitype,
+                                             self.last,  self.maximum))
