@@ -15,7 +15,7 @@ class BaseWorker(object):
         self.kwargs = kwargs
         self.itemtype = self.kwargs.get('type', "undefined")
         host = self.kwargs.get('host', "localhost")
-        db = self.kwargs.get('db', "localhost")
+        db = self.kwargs.get('db', "apirepl")
         cursor = pymysql.connect(host=host, db=db).cursor()
         self.cursor = cursor
 
