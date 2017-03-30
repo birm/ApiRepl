@@ -19,7 +19,7 @@ class BaseWorker(object):
         cursor = pymysql.connect(host=host, db=db).cursor()
         self.cursor = cursor
 
-        queue_query = "select * from queue where type = %s started is null\
+        queue_query = "select * from queue where type = %s and started is null\
         order by priority desc limit 1;"
         # keep those variables
         cursor.execute(queue_query, (self.itemtype, ))
